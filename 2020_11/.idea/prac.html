@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  function test7(arr, id) {
+    // TODO: 여기에 코드를 작성합니다.
+    for(let i =0; i < arr.length; i++){
+      if(arr[i].id === id){
+        return arr[i];
+      }
+      if(Array.isArray(arr[i].child)){
+        let result = test7(arr[i].child, id);
+        if(result !== true){
+          return result;
+        }
+      }
+    }
+    return null;
+  }
+</script>
+</body>
+</html>
