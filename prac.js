@@ -2,7 +2,7 @@ class Node {
   //생성자
   constructor(data) {
     this.data = data; // 데이터
-    this.next = null // 포인터
+    this.next = null; // 포인터
   }
 }
 const Node1 = new Node(10);
@@ -52,26 +52,30 @@ function insert(findV, insertV){
 }
 
 insert(30, 35)
+//  head = [node1[val] / next -> null]         ->
 
+function deleteNode(val){
+  let currentPointer = head;
+  //커런트포인터를 헤드로 잡아줌
 
-// function deleteNode(val){
-//   let currentPointer = head;
-//   //커런트포인터를 헤드로 잡아줌
-//   if(currentPointer.data === val){
-//     head = head.next;
-//   }else{
-//     while (currentPointer.data !== val){
-//       //현재 cp의 다음 노드의 데이터가 입력받은값이 아니라면 순회
-//       currentPointer = currentPointer.next;
-//     } //값이 일치하면
-//     let temp = currentPointer.next;
-//     //템프를 커런트포인터의 다음 노드로 지정
-//     currentPointer.next = temp.next;
-//     //그리고 커렌트포인터의 다음값을 템프의 다음값으로 지정해주면 자동으로 참조값이 없어진 temp는 사라짐.
-//   }
-// }
-
-
+  if(currentPointer.data === val){
+    //head
+    head = head.next;
+  }else{
+    while (currentPointer.data !== val){
+      //현재 cp의 다음 노드의 데이터가 입력받은값이 아니라면 순회
+      currentPointer = currentPointer.next;
+    } //값이 일치하면
+    let temp = currentPointer.next;
+    //템프를 커런트포인터의 다음 노드로 지정
+    currentPointer.next = temp.next;
+    //그리고 커렌트포인터의 다음값을 템프의 다음값으로 지정해주면 자동으로 참조값이 없어진 temp는 사라짐.
+  }
+}
+//1. temp를 이용한 방식이에요
+// []->  [] -> [value] -> []
+//                C ->
+//                temp->
 
 
 
@@ -83,14 +87,30 @@ function deleteNode(val){
   if(currentPointer.data === val){
     head = head.next;
   }else{
-    let prePointer = null;
+
+
+
+
+
+    let prePointer;
     while (currentPointer.next.data !== val){
       prePointer = currentPointer;
+
       currentPointer = currentPointer.next;
     }
     prePointer.next = currentPointer.next;
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
