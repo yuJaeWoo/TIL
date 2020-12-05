@@ -3,6 +3,7 @@ class Node {
   constructor(data) {
     this.data = data; // 데이터
     this.next = null; // 포인터
+    this.prev = null; // 이전 포인터
   }
 }
 const Node1 = new Node(10);
@@ -24,6 +25,7 @@ function add(value){
 
   }
   currentPointer.next = new Node(value);
+
 }
 
 
