@@ -55,25 +55,60 @@ class DoubleLinkedList {
 
     if (currentPointer.value === value) {
       //head
-      head = head.next;
+      this.head = this.head.next;
     } else {
       while (currentPointer.next.value !== value) {
         currentPointer = currentPointer.next;
-      } //값이 일치하면
+      }
       let temp = currentPointer.next;
-      //템프를 커런트포인터의 다음 노드로 지정
       currentPointer.next = temp.next;
       temp.next = null;
-      //그리고 커렌트포인터의 다음값을 템프의 다음값으로 지정해주면 자동으로 참조값이 없어진 temp는 사라짐
       this._size--;
     }
 
   }
+  insert(findV, insertV){
+    let currentPointer = this.head;
+    let inVal = new Node(insertV);
+    while (currentPointer.value !== findV){
+      currentPointer = currentPointer.next;
+    } // c.p -> inval -> c.p.next
+
+    inVal.next = currentPointer.next;
+    currentPointer.next = inVal;
+    inVal.prev = currentPointer
+    currentPointer.next.prev = inVal;
+  }
 }
-let abc = new DoubleLinkedList();
+
 const doubleLinked = new DoubleLinkedList();
 doubleLinked.add(44);
 doubleLinked.add(5);
-doubleLinked.delete(5);
+doubleLinked.add(55);
+doubleLinked.add(57);
+doubleLinked.delete(57);
+
+doubleLinked.insert(55, 56);
 
 doubleLinked.print();
+
+
+swap(a, b){   [this.heap[a], this.heap[b]] = [this.heap[b], this.heap[a]]  }
+class Heap{
+  constructor(){
+    this.heap =[null];
+  }
+  enqueue(value){
+    let child = this.heap.length;
+    let parent = Math.floor(cur)/2);
+    this.heap.push(value);
+  // 추가한 값보다 부모 노드의 값이 더 큰 값이 나올 때 까지 root를 향해 Swap해간다.
+  while(parent < val) {
+  this.swap(this.heap[parent], this.heap[child]);
+  child = parent;
+  parent = Math.floor(child)/2);
+  }
+  }
+
+
+}
