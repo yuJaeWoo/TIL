@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2614245-1267-46dd-8586-7905b8ebcd03" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/1203TIL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1207TIL.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607003751268</updated>
       <workItem from="1607003752502" duration="15000" />
+      <workItem from="1607339691295" duration="16000" />
     </task>
     <servers />
   </component>
@@ -67,5 +68,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
