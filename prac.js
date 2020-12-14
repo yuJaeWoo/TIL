@@ -214,14 +214,20 @@ const isSubsetOf = function (base, sample) {
   //sample을 돌면서 base의 값과 비교
   //값이 같은게 나오면 base의 현재값까지의 앞의 수들은 검사할 필요가 없어짐(삭제)
   base.sort(function(a, b) { // 오름차순
-    return a - b})
+    return a - b});
   sample.sort(function(a, b) { // 오름차순
-    return a - b})
+    return a - b});
 
-  for(let sampleEl of sample){
-    for(let baseEl of base){
-      if(sampleEl === baseEl){count--;}
-      base.shift();
+  for(let i =0; i< sample.length; i++){
+    let abc = sample[i];
+    for(let j=0; j < base.length; j++){
+      let bcd = base[j];
+      if(abc === bcd){
+        count -= 1;
+        break;
+      }else if(abc !== bcd){
+        base.shift();
+      }
     }
   }
 
@@ -233,4 +239,9 @@ const isSubsetOf = function (base, sample) {
   return result;
 };
 
-console.log(isSubsetOf([1,2,3,4], [1,2]));
+console.log(isSubsetOf([1,2,6,4,3,5,7,8,9], [3,4]));
+
+
+function fibonacci(n, memo) {   memo= memo || {};   if (memo[n] !== undefined) {     return memo[n];   }   if (n <= 1) return n   return memo[n] = (fibonacci(n - 2, memo) + fibonacci(n - 1, memo));   // 할당문은 객체나, 배열이나 변수에 넣어 주는 것 
+// 할당문은 항상 우변에 값을 완료 값으로 가지게 됨 => 항상 우변에 있는 값이 평가가 됨 
+// 그리고 return 하게 되면 완료 값이 return 하게 됨 } 
