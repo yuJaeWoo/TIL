@@ -246,22 +246,56 @@
 // // 할당문은 항상 우변에 값을 완료 값으로 가지게 됨 => 항상 우변에 있는 값이 평가가 됨 
 // // 그리고 return 하게 되면 완료 값이 return 하게 됨 } 
 
-function solution(s, n) {
-  var answer = '';
-  alp = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
-  let arr = s.toLowerCase().split('');
+// function solution(s, n) {
+//   var answer = '';
+//   alp = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
+//   let arr = s.toLowerCase().split('');
+//
+//   for(let i =0; i < arr.length; i++){
+//     for(let j =0; j < alp.length; j++){
+//       if(arr[i] === alp[j]){
+//         arr[i] = alp[j+n];
+//         answer.join(arr[i]);
+//       }else if(arr[i] === ' '){
+//         answer.join(arr[i]);
+//       }
+//     }
+//   }
+//   return answer;
+// }
+//
+// console.log(solution('AB', 2));
+const sudoku = function (board) {
+  // TODO: 여기에 코드를 작성합니다.
+  let arr = [1,2,3,4,5,6,7,8,9];
+  let result = board;
+  function inDel(a,b){
+    let i = 0;
+    if(board[a],[b] === 0){
+        board[a][b] = arr[i];
+        i++;
+      }
+    }else{
+    board[a][b]=0;
+  }
 
-  for(let i =0; i < arr.length; i++){
-    for(let j =0; j < alp.length; j++){
-      if(arr[i] === alp[j]){
-        arr[i] = alp[j+n];
-        answer.join(arr[i]);
-      }else if(arr[i] === ' '){
-        answer.join(arr[i]);
+  function recursion(ro){
+    if(ro === board.length;){
+      return result;
+    }
+
+    for(let i = ro; i <9; i++){
+      for(let j =0; j<9; j++){
+        if(!board[i][j] === 0){
+          recursion(ro + 1)
+        }else{
+          inDel(i,j);
+        }
+
       }
     }
+
   }
-  return answer;
+  recursion(0)
 }
 
-console.log(solution('AB', 2));
