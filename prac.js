@@ -265,37 +265,127 @@
 // }
 //
 // console.log(solution('AB', 2));
+let board = [
+  [0, 3, 0, 2, 6, 0, 7, 0, 1],
+  [6, 8, 0, 0, 7, 0, 0, 9, 0],
+  [1, 9, 0, 0, 0, 4, 5, 0, 0],
+  [8, 2, 0, 1, 0, 0, 0, 4, 0],
+  [0, 0, 4, 6, 0, 2, 9, 0, 0],
+  [0, 5, 0, 0, 0, 3, 0, 2, 8],
+  [0, 0, 9, 3, 0, 0, 0, 7, 4],
+  [0, 4, 0, 0, 5, 0, 0, 3, 6],
+  [7, 0, 3, 0, 1, 8, 0, 0, 0],
+];
+// const sudoku = function (board) {
+//   // TODO: 여기에 코드를 작성합니다.
+//   let arr = [1,2,3,4,5,6,7,8,9];
+//   let result = board;
+//   function inDel(a,b){
+//     let i = 0;
+//     if(board[a],[b] === 0){
+//         board[a][b] = arr[i];
+//         i++;
+//       }
+//     }else{
+//     board[a][b]=0;
+//   }
+//
+//   function recursion(ro){
+//     if(ro === board.length;){
+//       return result;
+//     }
+//
+//     for(let i = ro; i <9; i++){
+//       for(let j =0; j<9; j++){
+//         if(!board[i][j] === 0){
+//           recursion(ro + 1)
+//         }else{
+//           inDel(i,j);
+//         }
+//
+//       }
+//     }
+//
+//   }
+//   recursion(0)
+// }
+//
+///////////////////////
+
 const sudoku = function (board) {
-  // TODO: 여기에 코드를 작성합니다.
-  let arr = [1,2,3,4,5,6,7,8,9];
-  let result = board;
-  function inDel(a,b){
-    let i = 0;
-    if(board[a],[b] === 0){
-        board[a][b] = arr[i];
-        i++;
-      }
-    }else{
-    board[a][b]=0;
+  const N = board.length;
+  const boxes = [
+    [0, 0, 0, 1, 1, 1, 2, 2, 2],
+    [0, 0, 0, 1, 1, 1, 2, 2, 2],
+    [0, 0, 0, 1, 1, 1, 2, 2, 2],
+    [3, 3, 3, 4, 4, 4, 5, 5, 5],
+    [3, 3, 3, 4, 4, 4, 5, 5, 5],
+    [3, 3, 3, 4, 4, 4, 5, 5, 5],
+    [6, 6, 6, 7, 7, 7, 8, 8, 8],
+    [6, 6, 6, 7, 7, 7, 8, 8, 8],
+    [6, 6, 6, 7, 7, 7, 8, 8, 8],
+  ];
+  const getBoxNum = (row, col) => boxes[row][col];
+
+  const blanks = [];
+  const rowUsed = [];
+  const colUsed = [];
+  const boxUsed = [];
+  for (let row = 0; row < N; row++) {
+    rowUsed.push(Array(N + 1).fill(false));
+    colUsed.push(Array(N + 1).fill(false));
+    boxUsed.push(Array(N + 1).fill(false));
   }
 
-  function recursion(ro){
-    if(ro === board.length;){
-      return result;
+  for (let row = 0; row < N; row++) {
+    for (let col = 0; col < N; col++) {
+      if (board[row][col] === 0) {
+        blanks.push([row, col]);
+      } else {
+        const num = board[row][col];
+        const box = getBoxNum(row, col);
+        rowUsed[row][num] = true;
+        colUsed[col][num] = true;
+        boxUsed[box][num] = true;
+      }
+    }
+  }
+
+  const isValid = (row, col, num) => {
+    const box = getBoxNum(row, col);
+    return (
+        rowUsed[row][num] === false &&
+        colUsed[col][num] === false &&
+        boxUsed[box][num] === false
+    );
+  };
+
+  const toggleNum = (row, col, num) => {
+    const box = getBoxNum(row, col);
+    board[row][col] = num;
+    rowUsed[row][num] = !rowUsed[row][num];
+    colUsed[col][num] = !colUsed[col][num];
+    boxUsed[box][num] = !boxUsed[box][num];
+  };
+
+  const aux = (idx, blanks, board) => {
+    if (idx === blanks.length) {
+      return true;
     }
 
-    for(let i = ro; i <9; i++){
-      for(let j =0; j<9; j++){
-        if(!board[i][j] === 0){
-          recursion(ro + 1)
-        }else{
-          inDel(i,j);
+    const [row, col] = blanks[idx];
+    for (let num = 1; num <= 9; num++) {
+      if (isValid(row, col, num) === true) {
+        toggleNum(row, col, num);
+        if (aux(idx + 1, blanks, board) === true) {
+          return true;
         }
-
+        toggleNum(row, col, num);
       }
     }
+    return false;
+  };
 
-  }
-  recursion(0)
-}
-
+  aux(0, blanks, board);
+  return board;
+};
