@@ -169,67 +169,126 @@
 // };
 //
 
-/**
- * @param {string} s
- * @return {string}
- */
-var sortString = function(s) {
-  let sTring = ''; // sTring을 반환할것. ex) leetcode => cdelotee
-  let spare = [];
-  let dSpare = [];
-  let arr = s.split(''); //arr이라는 배열에 s문자열을 한글자씩 쪼개어서 넣음.
-  //leetcode => arr['l','e','e','t','c','o','d','e']
-  let count = 2;
-  let test = [];
-  for(let i =0; i< arr.length; i++){ //for문을 arr의 길이만큼 순회.
-    if(test.length === 0){ //test에 아무것도 들어있지 않으면.
-      test.push(arr[i]);  //test에 arr[i]를 넣는다.
-    }else if(test.includes(arr[i])){ //test에 arr[i]와 동일한 값이 있으면, 카운트를 올림.
-      spare.push(arr[i])
+// /**
+//  * @param {string} s
+//  * @return {string}
+//  */
+// var sortString = function(s) {
+//   let sTring = ''; // sTring을 반환할것. ex) leetcode => cdelotee
+//   let spare = [];
+//   let dSpare = [];
+//   let arr = s.split(''); //arr이라는 배열에 s문자열을 한글자씩 쪼개어서 넣음.
+//   //leetcode => arr['l','e','e','t','c','o','d','e']
+//   let count = 2;
+//   let test = [];
+//   for(let i =0; i< arr.length; i++){ //for문을 arr의 길이만큼 순회.
+//     if(test.length === 0){ //test에 아무것도 들어있지 않으면.
+//       test.push(arr[i]);  //test에 arr[i]를 넣는다.
+//     }else if(test.includes(arr[i])){ //test에 arr[i]와 동일한 값이 있으면, 카운트를 올림.
+//       spare.push(arr[i])
+//
+//     }else { // 그것도 아니라면 그냥 test에 arr[i]를 넣는다.
+//       test.push(arr[i]);
+//     }
+//
+//   }
+//   console.log(test)
+//   console.log(spare)
+//   test.sort(); // ['c','d','e','l','o','t'] , spare = ['e','e']
+//   console.log(test)
+//   function resursion(spare, count){ //재귀 내에서 박스를 만든다.
+//     let box =[]
+//     if(spare.length === 0){
+//       return;
+//     }
+//     for(let i =0; i<spare.length;i++){
+//       if(!box.include(spare(i))){
+//         box.push(spare(i))
+//       }if(box.include(spare(i))){
+//
+//         dSpare.push(spare[i])
+//         resursion(dSpare, count+1)
+//
+//       }
+//
+//       if(count%2 === 0){
+//         box.sort().reverse();
+//       }else{
+//         box.sort();
+//       }
+//       for(let el of box){
+//         test.push(el);
+//
+//       }
+//
+//     }
+//
+//
+//   }
+//   for(let el of test){
+//     sTring+=el;
+//   }
+//   return sTring;
+// }
+//
+//     let strin = 'aaabbbccc';
+//     console.log(sortString(strin))
 
-    }else { // 그것도 아니라면 그냥 test에 arr[i]를 넣는다.
-      test.push(arr[i]);
+const sudoku = function(board) {
+  // TODO: 여기에 코드를 작성합니다.
+  function checkRowConflict(rowIndex, num) {
+    for (let i = 0; i < 9; i++) {
+      if (board[rowIndex][i] === num) return true;
     }
-
+    return false;
   }
-  console.log(test)
-  console.log(spare)
-  test.sort(); // ['c','d','e','l','o','t'] , spare = ['e','e']
-  console.log(test)
-  function resursion(spare, count){ //재귀 내에서 박스를 만든다.
-    let box =[]
-    if(spare.length === 0){
-      return;
+  function checkColConflict(colIndex, num) {
+    for (let i = 0; i < 9; i++) {
+      if (board[i][colIndex] === num) return true;
     }
-    for(let i =0; i<spare.length;i++){
-      if(!box.include(spare(i))){
-        box.push(spare(i))
-      }if(box.include(spare(i))){
-
-        dSpare.push(spare[i])
-        resursion(dSpare, count+1)
-
+    return false;
+  }
+  // [0, 0] ~ [2, 2] 0
+  // [3, 3] ~ [5, 5] 1
+  function checkSquareConflict(rowIndex, colIndex, num) {
+    rowIndex = Math.floor(rowIndex / 3) * 3;
+    colIndex = Math.floor(colIndex / 3) * 3;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[rowIndex + i][colIndex + j] === num) return true;
       }
-
-      if(count%2 === 0){
-        box.sort().reverse();
-      }else{
-        box.sort();
-      }
-      for(let el of box){
-        test.push(el);
-
-      }
-
     }
-
-
+    return false;
   }
-  for(let el of test){
-    sTring+=el;
+  function findZeroPosition(arr) {
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (board[i][j] === 0) {
+          arr[0] = i;
+          arr[1] = j;
+          return true;
+        }
+      }
+    }
+    return undefined;
   }
-  return sTring;
-}
-
-    let strin = 'aaabbbccc';
-    console.log(sortString(strin))
+  function checkConflict(row, col, num) {
+    return (!checkRowConflict(row, num) && !checkColConflict(col, num) &&
+        !checkSquareConflict(row, col, num));
+  }
+  function recursion() {
+    const arr = [];
+    if (!findZeroPosition(arr)) return true;
+    const [row, col] = arr;
+    for (let i = 1; i <= 9; i++) {
+      if (checkConflict(row, col, i)) {
+        board[row][col] = i;
+        if (recursion()) return true;
+        board[row][col] = 0;
+      }
+    }
+    return false;
+  }
+  recursion();
+  return board;
+};
