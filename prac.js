@@ -534,3 +534,20 @@ const sudoku = function (board) {
 //   recursion();
 //   return board;
 // };
+
+// const powerSet = function (str) {
+//   // TODO: 여기에 코드를 작성합니다.
+//   let args = str.split('')
+//   let newArgs = [...new Set(args)] //인자의 중복제거.
+//   let arrangedString = newArgs.sort()
+//   let newString = arrangedString.join('')
+//   let result = []
+//   let subSets = function (string, index) {
+//     result.push(string)
+//     for (let i = index; i < newString.length; i++) {
+//       subSets(string + newString[i], i + 1)
+//     }
+//   }
+//   subSets('', 0)
+//   return result
+// };
