@@ -265,17 +265,17 @@
 // }
 //
 // console.log(solution('AB', 2));
-let board = [
-  [0, 3, 0, 2, 6, 0, 7, 0, 1],
-  [6, 8, 0, 0, 7, 0, 0, 9, 0],
-  [1, 9, 0, 0, 0, 4, 5, 0, 0],
-  [8, 2, 0, 1, 0, 0, 0, 4, 0],
-  [0, 0, 4, 6, 0, 2, 9, 0, 0],
-  [0, 5, 0, 0, 0, 3, 0, 2, 8],
-  [0, 0, 9, 3, 0, 0, 0, 7, 4],
-  [0, 4, 0, 0, 5, 0, 0, 3, 6],
-  [7, 0, 3, 0, 1, 8, 0, 0, 0],
-];
+// let board = [
+//   [0, 3, 0, 2, 6, 0, 7, 0, 1],
+//   [6, 8, 0, 0, 7, 0, 0, 9, 0],
+//   [1, 9, 0, 0, 0, 4, 5, 0, 0],
+//   [8, 2, 0, 1, 0, 0, 0, 4, 0],
+//   [0, 0, 4, 6, 0, 2, 9, 0, 0],
+//   [0, 5, 0, 0, 0, 3, 0, 2, 8],
+//   [0, 0, 9, 3, 0, 0, 0, 7, 4],
+//   [0, 4, 0, 0, 5, 0, 0, 3, 6],
+//   [7, 0, 3, 0, 1, 8, 0, 0, 0],
+// ];
 // const sudoku = function (board) {
 //   // TODO: 여기에 코드를 작성합니다.
 //   let arr = [1,2,3,4,5,6,7,8,9];
@@ -312,85 +312,85 @@ let board = [
 //
 ///////////////////////
 
-const sudoku = function (board) {
-  const N = board.length; //board의 길이(내부에 있는 배열갯수)만큼 순회하는 변수선언
-  const boxes = [
-    [0, 0, 0, 1, 1, 1, 2, 2, 2],
-    [0, 0, 0, 1, 1, 1, 2, 2, 2],
-    [0, 0, 0, 1, 1, 1, 2, 2, 2],
-    [3, 3, 3, 4, 4, 4, 5, 5, 5],
-    [3, 3, 3, 4, 4, 4, 5, 5, 5],
-    [3, 3, 3, 4, 4, 4, 5, 5, 5],
-    [6, 6, 6, 7, 7, 7, 8, 8, 8],
-    [6, 6, 6, 7, 7, 7, 8, 8, 8],
-    [6, 6, 6, 7, 7, 7, 8, 8, 8],
-  ];
-  let getBoxNum;
-  getBoxNum = (row, col) => boxes[row][col];
-
-  const blanks = [];
-  const rowUsed = [];
-  const colUsed = [];
-  const boxUsed = [];
-  for (let row = 0; row < N; row++) {
-    rowUsed.push(Array(N + 1).fill(false));
-    colUsed.push(Array(N + 1).fill(false));
-    boxUsed.push(Array(N + 1).fill(false));
-  }
-
-  for (let row = 0; row < N; row++) {
-    for (let col = 0; col < N; col++) {
-      if (board[row][col] === 0) {
-        blanks.push([row, col]);
-      } else {
-        const num = board[row][col];
-        const box = getBoxNum(row, col);
-        rowUsed[row][num] = true;
-        colUsed[col][num] = true;
-        boxUsed[box][num] = true;
-      }
-    }
-  }
-
-  const isValid = (row, col, num) => {
-    const box = getBoxNum(row, col);
-    return (
-        rowUsed[row][num] === false &&
-        colUsed[col][num] === false &&
-        boxUsed[box][num] === false
-    );
-  };
-
-  const toggleNum = (row, col, num) => {
-    const box = getBoxNum(row, col);
-    board[row][col] = num;
-    rowUsed[row][num] = !rowUsed[row][num];
-    colUsed[col][num] = !colUsed[col][num];
-    boxUsed[box][num] = !boxUsed[box][num];
-  };
-
-  const aux = (idx, blanks, board) => {
-    if (idx === blanks.length) {
-      return true;
-    }
-
-    const [row, col] = blanks[idx];
-    for (let num = 1; num <= 9; num++) {
-      if (isValid(row, col, num) === true) {
-        toggleNum(row, col, num);
-        if (aux(idx + 1, blanks, board) === true) {
-          return true;
-        }
-        toggleNum(row, col, num);
-      }
-    }
-    return false;
-  };
-
-  aux(0, blanks, board);
-  return board;
-};
-
+// const sudoku = function (board) {
+//   const N = board.length; //board의 길이(내부에 있는 배열갯수)만큼 순회하는 변수선언
+//   const boxes = [
+//     [0, 0, 0, 1, 1, 1, 2, 2, 2],
+//     [0, 0, 0, 1, 1, 1, 2, 2, 2],
+//     [0, 0, 0, 1, 1, 1, 2, 2, 2],
+//     [3, 3, 3, 4, 4, 4, 5, 5, 5],
+//     [3, 3, 3, 4, 4, 4, 5, 5, 5],
+//     [3, 3, 3, 4, 4, 4, 5, 5, 5],
+//     [6, 6, 6, 7, 7, 7, 8, 8, 8],
+//     [6, 6, 6, 7, 7, 7, 8, 8, 8],
+//     [6, 6, 6, 7, 7, 7, 8, 8, 8],
+//   ];
+//   let getBoxNum;
+//   getBoxNum = (row, col) => boxes[row][col];
+//
+//   const blanks = [];
+//   const rowUsed = [];
+//   const colUsed = [];
+//   const boxUsed = [];
+//   for (let row = 0; row < N; row++) {
+//     rowUsed.push(Array(N + 1).fill(false));
+//     colUsed.push(Array(N + 1).fill(false));
+//     boxUsed.push(Array(N + 1).fill(false));
+//   }
+//
+//   for (let row = 0; row < N; row++) {
+//     for (let col = 0; col < N; col++) {
+//       if (board[row][col] === 0) {
+//         blanks.push([row, col]);
+//       } else {
+//         const num = board[row][col];
+//         const box = getBoxNum(row, col);
+//         rowUsed[row][num] = true;
+//         colUsed[col][num] = true;
+//         boxUsed[box][num] = true;
+//       }
+//     }
+//   }
+//
+//   const isValid = (row, col, num) => {
+//     const box = getBoxNum(row, col);
+//     return (
+//         rowUsed[row][num] === false &&
+//         colUsed[col][num] === false &&
+//         boxUsed[box][num] === false
+//     );
+//   };
+//
+//   const toggleNum = (row, col, num) => {
+//     const box = getBoxNum(row, col);
+//     board[row][col] = num;
+//     rowUsed[row][num] = !rowUsed[row][num];
+//     colUsed[col][num] = !colUsed[col][num];
+//     boxUsed[box][num] = !boxUsed[box][num];
+//   };
+//
+//   const aux = (idx, blanks, board) => {
+//     if (idx === blanks.length) {
+//       return true;
+//     }
+//
+//     const [row, col] = blanks[idx];
+//     for (let num = 1; num <= 9; num++) {
+//       if (isValid(row, col, num) === true) {
+//         toggleNum(row, col, num);
+//         if (aux(idx + 1, blanks, board) === true) {
+//           return true;
+//         }
+//         toggleNum(row, col, num);
+//       }
+//     }
+//     return false;
+//   };
+//
+//   aux(0, blanks, board);
+//   return board;
+// };
+//
 
 
 ////동현님 레퍼런스
@@ -551,3 +551,57 @@ const sudoku = function (board) {
 //   subSets('', 0)
 //   return result
 // };
+
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const app = express();
+const router = express.Router();
+const port = 8080;
+const fs = require('fs');
+let memory = { // memory라는 저장형태를 할당
+  results: [],
+};
+fs.readFile('./data.json', 'utf8', (err, data) => {
+// ./data.jason의 경로에서 data를 받는데 err라면 그대로 return시키고 해당 함수를 종료
+// data가 있다면 memory에 parse를 하고나서 넣는다.
+  if (err) {
+    return;
+  }
+  memory = JSON.parse(data);
+});
+
+router.use(bodyParser.json());
+router
+    .route('/video') // /video로 url을 맵핑후 해당 라우트의 조건(/video)에 맞춰서 실행되는 get,post
+
+    .get((req, res) => { //get요청을 하였을때 리퀘스트를 출력하고 성공한 코드와 메모리를 반환.
+      console.log(req);
+      res.status(200).json(memory);
+    })
+    .post((req, res) => {
+      memory.results.push(req.body);
+      fs.writeFile('./data.json', JSON.stringify(memory), (err) => { //생성의 역할을 함.
+        if (err) throw err;
+      });
+      res.status(201).json(req.body);
+      // do something
+    });
+app.use(cors());
+app.use('/', router);
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
