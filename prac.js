@@ -599,9 +599,39 @@ app.listen(port, () => {
 
 
 
+// 주희님이 정리하신 redux
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import reportWebVitals from './reportWebVitals';
+// // import './exercise'
+// import {Provider} from 'react-redux';
+// // yarn add react-redux package download
+// // Provider를 통해서 react project에서 redux 적용 가능
+// import {createStore} from 'redux';
+// // store를 만들어주는 redux 함수 reducer를 parameter로 넣기 때문에, rootReducer까지 불러오기
+// import rootReducer from "./modules";
+// // index.js에서 rootReducer를 export했기 때문에 ./modules 불러오면 바로 index.js를 불러온다
+// import {composeWithDevTools} from "redux-devtools-extension";
+// // store 만들어주기
+// const store = createStore(rootReducer, composeWithDevTools());
+// // console.log(store.getState()) // redux store 상태 === {counter: {…}, todos: Array(0)}
+// ReactDOM.render(
+//     <Provider store={store}>
+//       {/*props를 통해서 store 값 설정, react, component 어디에서든 store 사용 가능 */}
+//       <App/>
+//     </Provider>,
+//     document.getElementById('root')
+// );
+// // If you want to start measuring performance in your app, pass a function
+// // to log results (for example: reportWebVitals(console.log))
+// // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// reportWebVitals();
+//
+//
+//
+//
 
 
-
-
-
-
+// 9:28 view(컴포넌트)에서 어떤 이벤트가 발생하면 store의 값을 수정하는 로직을 실행한다고 합시다 9:28 그렇게 하기 위해서는 그 컴포넌트랑 store가 연결되어 있어야 돼요 9:28 그래서 쓰는 함수가 connect죠 9:29 자 그런데 여기서 발생한 이벤트가 store의 값을 수정해야하는 이벤트니까 9:29 action을 전달해줘야해요 9:29 dispatch가 필요해요 9:30 그래서 connect(null, mapDispatchToProps)(컴포넌트) 9:30 해당 컴포넌트에 디스패치를 연결해줘요 9:31 디스패치를 연결해줬다는건 즉 store와 연결해줬다는 뜻이에요 9:31 디스패치가 리듀서 액션을 전달할거니까요 9:32 리듀서는 액션을 받아서 스토어를 업데이트해요 9:33 여기서 뷰(컴포넌트)가 업데이트 되어야하는데 어떤 뷰가 업데이트 되느냐 9:33 스토어랑 연결된 컴포넌트중에 스토어에서 값을 꺼내 쓰는 애들 9:33 그 중에서 값이 변경된 애들 9:33 아직 값을 꺼내쓰는 연결은 위에서 언급된적이 없어요 9:34 값을 꺼내 쓰는건 connect(mapStateToProps)(컴포넌트2) 9:34 이렇게 연결을 해요 새 항목 9:34 그럼 컴포넌트2는 스토어에서 값을 꺼내 쓸 수가 있어요 9:35 그럼 아까전으로 돌아가서 스토어가 업데이트 될때 9:35 컴포넌트 2에서 쓰고있는 상태 값이 변경이 됐으면 9:35 컴포넌트 2는 다시 렌더링이 돼요 
